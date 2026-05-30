@@ -1,0 +1,335 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  color: #333;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 260px;
+  background-color: #1e3d2f;
+  color: #fff;
+  padding: 40px 20px;
+  position: fixed;
+  height: 100vh;
+}
+
+.sidebar h1 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.sidebar .subtitle {
+  font-size: 14px;
+  color: #a3b899;
+}
+
+.sidebar hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #3a5a40;
+}
+
+.gallery-menu p {
+  padding: 12px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.gallery-menu p:hover,
+.gallery-menu p.active {
+  background-color: #3a5a40;
+}
+
+/* Main Content Wrapper */
+.main-content {
+  margin-left: 260px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.gallery-info-banner {
+  border-left: 5px solid #3a5a40;
+  padding: 20px 25px;
+  margin-top: 20px;
+  gap: 10px;
+  border-radius: 30px;
+  background-color: #1e3d2f;
+}
+
+.gallery-info-banner p {
+  margin: 0;
+  display: flex;
+  align-items: center; /* Icons aur text ko straight horizontal line me rakhne ke liye */
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+  transition: all ease 1s;
+}
+.gallery-info-banner:hover {
+  background-color: #3a5a4023;
+  transform: scale(1);
+}
+/* Hero Section */
+.hero-section {
+  background-image: url(https://media.istockphoto.com/id/2178867579/photo/world-map-with-pakistan-flag-overlay.webp?a=1&b=1&s=612x612&w=0&k=20&c=0_rwbU_uV6GR-t4_SPyRZ0weVlhoGCUErNVCmU1aorM=);
+
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
+  color: rgb(230, 231, 230);
+  padding: 60px 40px;
+  text-align: center;
+}
+.heading {
+  color: #225f43;
+  font-size: 70px;
+  font-family: cursive;
+}
+
+.hero-section h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.gallery-section {
+  padding: 30px;
+  flex: 1;
+  background-color: #f4f7f6;
+}
+
+.img-grid {
+  column-count: 3;
+  column-gap: 20px;
+  width: 100%;
+}
+
+/* Main Card Wrapper */
+.img-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px; /* Vertical gap */
+  break-inside: avoid;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Card image box wrapper */
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+}
+
+/* Image default setting */
+.card-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.card-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(30, 61, 47, 0.95),
+    rgba(0, 0, 0, 0.3)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card-image-wrapper:hover .card-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-info h3 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.card-info p {
+  color: #a3b899;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* --- Responsive Settings --- */
+@media (max-width: 900px) {
+  .img-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .img-grid {
+    column-count: 1;
+  }
+}
+
+/* Lightbox Base Container */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 260px; /* Sidebar area bypass */
+  top: 10;
+  width: calc(100% - 260px);
+  height: 100%;
+  margin: 20px;
+  border-radius: 100px;
+
+  background-color: rgba(22, 36, 29, 0.489); /* Solid contrast background */
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+}
+
+.lightbox-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lightbox-content img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(38, 141, 85, 0.852);
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Caption spacing adjust */
+#lightboxCaption {
+  color: #1edb4a;
+  font-size: 1.8rem;
+  margin-top: 25px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* UI Icons Controls Setup */
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: #50c719;
+  font-size: 45px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.lightbox-close:hover {
+  color: #ffffff;
+}
+
+/* Prev/Next Navigation Controls */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(149, 180, 154, 0.094);
+  color: #ffffff;
+  border: none;
+  width: 55px;
+  height: 55px;
+  font-size: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(50, 180, 69, 0.3);
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background-color: #1cb939;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+  left: 40px;
+}
+.lightbox-next {
+  right: 40px;
+}
+
+/* Responsive adjustments for smaller windows */
+@media (max-width: 1100px) {
+  .lightbox-content {
+    max-width: 700px;
+  }
+  .lightbox-content img {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 900px) {
+  .lightbox-modal {
+    left: 0;
+    width: 100%;
+    padding: 30px;
+  }
+  .lightbox-content img {
+    height: 45vh;
+  }
+  .lightbox-prev {
+    left: 15px;
+  }
+  .lightbox-next {
+    right: 15px;
+  }
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #e9ecef;
+  font-size: 14px;
+  color: #6c757d;
+}
