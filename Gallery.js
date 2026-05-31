@@ -53,12 +53,11 @@ let currentImgIndex = 0;
 
 function displayGallery(filter = 'all') {
     let htmlContent = "";
-    filteredGalleryData = []; // Purani state reset karein
+    filteredGalleryData = []; 
 
     for (let category in galleryData) {
         galleryData[category].forEach(item => {
             if (filter === 'all' || item.category === filter) {
-                // Jo target picture render ho rahi hai, usay global navigation list mein save karein
                 filteredGalleryData.push(item);
 
                 htmlContent += `
@@ -80,7 +79,7 @@ function displayGallery(filter = 'all') {
 
 
 function openLightbox(imgId) {
-    // Current clicked image ka index search karein sirf filtered data array mein se
+
     currentImgIndex = filteredGalleryData.findIndex(img => img.id === imgId);
 
     if (currentImgIndex !== -1) {
@@ -128,7 +127,7 @@ menuItems.forEach(button => {
         button.classList.add('active');
 
         const selectedFilter = button.getAttribute('data-target');
-        displayGallery(selectedFilter); // Yeh display global array ko auto-bound kar dega
+        displayGallery(selectedFilter); 
     });
 });
 
