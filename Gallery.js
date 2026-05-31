@@ -1,4 +1,4 @@
-// Dynamic Images ke sath Pakistan Gallery Data
+
 const galleryData = {
     mountains: [
         { id: "m1", name: "K2 (Godwin-Austen)", category: "mountain", image: "https://images.unsplash.com/photo-1627896157734-4d7d4388f28b?w=600&auto=format&fit=crop&q=60" },
